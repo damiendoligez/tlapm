@@ -148,6 +148,9 @@ let run max_threads tl =
       let outs = if !Params.toolbox then Unix.stdin :: outs else outs in
       let (ready, _, _) = Unix.select outs [] [] delay in
 
+      (* Some time has elapsed. *)
+      let now = Unix.gettimeofday () in
+
       (* outputs *)
       let f d =
         if List.mem d.ofd ready then begin
